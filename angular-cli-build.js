@@ -15,7 +15,11 @@ module.exports = function(defaults) {
       'es6-shim/es6-shim.js',
       'reflect-metadata/**/*.+(ts|js|js.map)',
       'rxjs/**/*.+(js|js.map)',
-      '@angular/**/*.+(js|js.map)'
+      '@angular/**/*.+(js|js.map)',
+      // above are the existing entries
+      // below are the AngularFire entries
+      'angularfire2/**/*.js',
+      'firebase/*.js'
     ]
   });
 };

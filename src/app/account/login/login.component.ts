@@ -15,7 +15,10 @@ export class LoginComponent implements OnInit {
   }
 
     login(email: string, password: string) {
-        this.af.auth.login({ email: email, password: password });
+        this.af.auth.login({ email: email, password: password })
+          .then(function(result){
+            console.log(result);
+        });
     }
 
 }

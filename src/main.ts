@@ -25,8 +25,8 @@ bootstrap(AppComponent, [
     storageBucket: "setlisthelper-f3cd5.appspot.com"
   }),
   firebaseAuthConfig({
-    provider: AuthProviders.Password,
-    method: AuthMethods.Redirect
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
   })
 ]);
 

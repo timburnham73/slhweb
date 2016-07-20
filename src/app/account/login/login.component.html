@@ -1,3 +1,7 @@
 <p>
   login works!
 </p>
+
+<input type="text" #email type="email" />
+<input type="text" #password />
+<button (click)="login(email.value, password.value)">Login</button>

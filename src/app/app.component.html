@@ -1,16 +1,2 @@
-<ul>
-  <li *ngFor="let song of items | async">
-    <input type="text" placeholder="name" #songname [value]="song.name" />
-    <input type="text" #songlength placeholder="length" [value]="song.length" />
-    <input type="text" #songkey placeholder="key" [value]="song.key" />
-    <button (click)="update(song.$key, song.value)">Update</button>
-    <button (click)="deleteItem(song.$key)">Delete</button>
-  </li>
-</ul>
-
-<input type="text" #songname />
-<input type="text" #length />
-<input type="text" #key />
-<button (click)="add(songname.value, length.value, key.value)">Add</button>
-<button (click)="deleteEverything()">Delete All</button>
+<h1>app component</h1>
 <router-outlet></router-outlet>

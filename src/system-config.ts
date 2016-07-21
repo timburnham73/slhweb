@@ -13,6 +13,26 @@ const map: any = {
 const packages: any = {
 };
 
+const materialPkgs: string[] = [
+  'core',
+  'button',
+  'card',
+  'grid-list',
+  'icon',
+  'input',
+  'list',
+  'menu',
+  'radio',
+  'sidenav',
+  'slide-toggle',
+  'tabs',
+  'toolbar',
+];
+
+materialPkgs.forEach((pkg) => {
+  packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
+});
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
  * Everything underneath this line is managed by the CLI.
@@ -64,7 +84,8 @@ System.config({
     'rxjs': 'vendor/rxjs',
     'main': 'main.js',
     'firebase': 'vendor/firebase/firebase.js',
-    'angularfire2': 'vendor/angularfire2'
+    'angularfire2': 'vendor/angularfire2',
+    '@angular2-material': 'vendor/@angular2-material'
   },
   packages: cliSystemConfigPackages
 });

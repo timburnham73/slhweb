@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
+import {MATERIAL_DIRECTIVES} from 'ng2-material';
+import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
+import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
+import {MD_LIST_DIRECTIVES} from "@angular2-material/list/list";
 
 @Component({
   moduleId: module.id,
   selector: 'app-songs',
   templateUrl: 'songs.component.html',
-  styleUrls: ['songs.component.css']
+  styleUrls: ['songs.component.css'],
+  directives: [MD_CARD_DIRECTIVES, MD_BUTTON_DIRECTIVES, MdIcon, MD_LIST_DIRECTIVES],
+  providers: [MdIconRegistry]
 })
 export class SongsComponent implements OnInit {
   items: FirebaseListObservable<any[]>;

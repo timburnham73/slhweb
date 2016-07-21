@@ -1,0 +1,83 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.hidden{
+  display: none !important;
+}
+.hidden-child{
+  > * {
+    display: none !important;
+  }
+}
+
+/* Color */
+.white{
+  color: #FFF;
+}
+
+/* text decoration */
+.underline{
+  text-decoration: underline;
+}
+.no-underline{
+  text-decoration: none;
+}
+
+/* Flex */
+[flex] {
+  display: flex;
+  &[flex-wrap] {
+    flex-wrap: wrap;
+  }
+  &[no-flex-wrap] {
+    flex-wrap: nowrap;
+  }
+  &[layout="row"] {
+    flex-direction: row;
+    &[col="3"] {
+      > * {
+        position: relative;
+        padding: 24px 24px 0 0;
+        width: 33.33%;
+      }
+      > *:nth-child(3n+1) {
+        padding-left: 24px;
+      }
+    }
+  }
+  &[layout="column"] {
+    flex-direction: column;
+  }
+  [flex-item] {
+    flex: 1;
+  }
+  [flex-align],
+  [flex-align="start"] {
+    align-self: flex-start;
+  }
+  [flex-align="end"] {
+    -webkit-align-self: flex-end;
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+  }
+}
+
+/* buttons */
+.btn {
+  &.btn-lg {
+    font-size: 36px;
+    line-height: 64px;
+    height: initial;
+    width: 64px;
+
+    md-icon {
+      font-size: inherit;
+      line-height: 0.5;
+      vertical-align: middle;
+      width: 100%
+    }
+  }
+}

@@ -1,2 +1,13 @@
-<h1>app component</h1>
-<router-outlet></router-outlet>
+<md-sidenav-layout fullscreen>
+  <md-sidenav #sidenav>
+    <md-nav-list>
+      <a md-list-item *ngFor="let view of views">
+        <md-icon md-list-icon>{{view.icon}}</md-icon>
+        <span md-line>{{view.name}}</span>
+        <span md-line class="secondary">{{view.description}}</span>
+      </a>
+    </md-nav-list>
+  </md-sidenav>
+  <app-title-bar [sidenav]="sidenav"></app-title-bar>
+  <router-outlet></router-outlet>
+</md-sidenav-layout>

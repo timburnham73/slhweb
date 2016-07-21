@@ -13,3 +13,22 @@
 <input type="text" #key />
 <button (click)="add(songname.value, length.value, key.value)">Add</button>
 <button (click)="deleteEverything()">Delete All</button>
+
+<md-content>
+<md-data-table layout-fill>
+  <thead>
+  <tr>
+    <th class="md-text-cell">Material</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let song of items | async">
+    <td class="md-text-cell">{{ song.name }}</td>
+    <td>{{ song.length }}</td>
+    <td>{{ song.key }}</td>
+  </tr>
+  </tbody>
+</md-data-table>
+</md-content>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
-import {MATERIAL_DIRECTIVES} from 'ng2-material';
+
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import {MD_LIST_DIRECTIVES} from "@angular2-material/list/list";
@@ -25,6 +25,10 @@ export class SongsComponent implements OnInit {
 
 
   }
+  onRowClick(song){
+    console.log(song);
+  }
+
   add(newName: string, length: string, key: string) {
     this.items.push({ name: newName, length: length, key: key });
   }

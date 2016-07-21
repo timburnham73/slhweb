@@ -15,7 +15,17 @@
 <button (click)="deleteEverything()">Delete All</button>
 
 <md-content>
-<md-data-table layout-fill>
+
+  <md-card>
+    <md-card-header>
+      <md-card-header-text>
+        <h2 class=“md-title”>Header title</h2>
+        <span class=“md-subhead”>Subtitle</span>
+      </md-card-header-text>
+    </md-card-header>
+
+    <md-card-content>
+      <md-data-table layout-fill>
   <thead>
   <tr>
     <th class="md-text-cell">Material</th>
@@ -24,11 +34,14 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let song of items | async">
+  <tr *ngFor="let song of items | async" (click)="onRowClick(song)">
     <td class="md-text-cell">{{ song.name }}</td>
     <td>{{ song.length }}</td>
     <td>{{ song.key }}</td>
   </tr>
   </tbody>
 </md-data-table>
+    </md-card-content>
+  </md-card>
 </md-content>
+

@@ -11,6 +11,7 @@ const map: any = {
 
 /** User packages configuration. */
 const packages: any = {
+
 };
 
 const materialPkgs: string[] = [
@@ -57,6 +58,7 @@ const barrels: string[] = [
   'app/account',
   'app/login',
   'app/songs',
+  'app/song-edit',
   /** @cli-barrel */
 ];
 
@@ -68,7 +70,11 @@ const cliSystemConfigPackages: any = {
   angularfire2: {
     defaultExtension: 'js',
     main: 'angularfire2.js'
+  },
+  'ng2-material': {//this needs to be nested in packages
+    defaultExtension: 'js'
   }
+
 };
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
@@ -85,7 +91,8 @@ System.config({
     'main': 'main.js',
     'firebase': 'vendor/firebase/firebase.js',
     'angularfire2': 'vendor/angularfire2',
-    '@angular2-material': 'vendor/@angular2-material'
+    '@angular2-material': 'vendor/@angular2-material',
+    'ng2-material': 'vendor/ng2-material'
   },
   packages: cliSystemConfigPackages
 });

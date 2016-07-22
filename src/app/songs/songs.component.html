@@ -1,46 +1,37 @@
-<ul>
-  <li *ngFor="let song of items | async">
-    <input type="text" placeholder="name" #songname [value]="song.name" />
-    <input type="text" #songlength placeholder="length" [value]="song.length" />
-    <input type="text" #songkey placeholder="key" [value]="song.key" />
-    <button (click)="update(song.$key, song.value)">Update</button>
-    <button (click)="deleteItem(song.$key)">Delete</button>
-  </li>
-</ul>
-
-<input type="text" #songname />
-<input type="text" #length />
-<input type="text" #key />
-<button (click)="add(songname.value, length.value, key.value)">Add</button>
-<button (click)="deleteEverything()">Delete All</button>
-
 <md-content>
 
   <md-card>
-    <md-card-header>
-      <md-card-header-text>
-        <h2 class=“md-title”>Header title</h2>
-        <span class=“md-subhead”>Subtitle</span>
-      </md-card-header-text>
-    </md-card-header>
+    <md-toolbar>
+      <button  md-button class="md-icon-button" (click)="add('boodle', '4523', 'B')" aria-label="Settings">
+        <i md-icon>menu</i>
+      </button>
+      <span>Toolbar with Icon Buttons</span>
+      <span flex></span>
+      <button md-button class="md-icon-button" aria-label="Favorite">
+        <i md-icon>favorite</i>
+      </button>
+      <button md-button class="md-icon-button" aria-label="More">
+        <i md-icon>more_vert</i>
+      </button>
+    </md-toolbar>
 
     <md-card-content>
       <md-data-table layout-fill>
-  <thead>
-  <tr>
-    <th class="md-text-cell">Material</th>
-    <th>Quantity</th>
-    <th>Unit price</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let song of items | async" (click)="onRowClick(song)">
-    <td class="md-text-cell">{{ song.name }}</td>
-    <td>{{ song.length }}</td>
-    <td>{{ song.key }}</td>
-  </tr>
-  </tbody>
-</md-data-table>
+        <thead>
+        <tr>
+          <th class="md-text-cell">Material</th>
+          <th>Quantity</th>
+          <th>Unit price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let song of items | async" (click)="onRowClick(song)">
+          <td class="md-text-cell">{{ song.name }}</td>
+          <td>{{ song.length }}</td>
+          <td>{{ song.key }}</td>
+        </tr>
+        </tbody>
+      </md-data-table>
     </md-card-content>
   </md-card>
 </md-content>

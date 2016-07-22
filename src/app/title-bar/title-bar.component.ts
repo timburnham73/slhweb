@@ -15,7 +15,7 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
              providers: [MdIconRegistry]
            })
 export class TitleBarComponent implements OnInit {
-  title = 'Cake Order Form 2';
+  title = 'Setlist Helper';
 
   constructor() {
 

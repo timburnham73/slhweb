@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
+import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 import {MD_LIST_DIRECTIVES} from "@angular2-material/list/list";
 import {MdToolbar} from '@angular2-material/toolbar';
@@ -13,7 +14,7 @@ import {ROUTER_DIRECTIVES, Router} from '@angular/router';
   selector: 'app-songs',
   templateUrl: 'songs.component.html',
   styleUrls: ['songs.component.css'],
-  directives: [ MD_CARD_DIRECTIVES, MD_BUTTON_DIRECTIVES, MdIcon, MdToolbar, MD_LIST_DIRECTIVES, ROUTER_DIRECTIVES],
+  directives: [ MD_CARD_DIRECTIVES, MD_BUTTON_DIRECTIVES, MdIcon, MdToolbar, MD_LIST_DIRECTIVES, ROUTER_DIRECTIVES, MD_INPUT_DIRECTIVES],
   providers: [MdIconRegistry]
 })
 export class SongsComponent implements OnInit {

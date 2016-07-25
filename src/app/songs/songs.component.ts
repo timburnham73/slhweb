@@ -30,7 +30,11 @@ export class SongsComponent implements OnInit {
     const path = `/songs`;
     this.items = af.database.list(path);
 
-    this.songs = af.database.list(path).map( songs => songs.filter(song => song.uid === auth.id));
+    this.songs = af.database.list(path,{
+      query:{
+        orderByChild: 'name'
+      }
+    }).map( songs => songs.filter(song => song.uid === auth.id));
 
 
 

@@ -3,7 +3,8 @@ import {MdButton} from '@angular2-material/button';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 import {MD_LIST_DIRECTIVES} from '@angular2-material/list';
 import {MdToolbar} from '@angular2-material/toolbar';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES, Router} from '@angular/router';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 @Component({
              moduleId: module.id,
@@ -17,10 +18,15 @@ import {ROUTER_DIRECTIVES} from '@angular/router';
 export class TitleBarComponent implements OnInit {
   title = 'Setlist Helper';
 
-  constructor() {
+  constructor(public af: AngularFire, private router: Router) {
 
   }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.af.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

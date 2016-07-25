@@ -4,6 +4,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { provideRouter } from '@angular/router';
 import { AppRoutes } from './app/app.routes';
 import {disableDeprecatedForms, provideForms} from '@angular/forms';
+import { AUTH_PROVIDERS } from './app/account/auth/index';
 
 import { AppComponent, environment } from './app/';
 import {FIREBASE_PROVIDERS,
@@ -32,6 +33,7 @@ bootstrap(AppComponent, [
   }),
   disableDeprecatedForms(),
   provideForms(),
-  HTTP_PROVIDERS
+  HTTP_PROVIDERS,
+  AUTH_PROVIDERS
 ]);
 

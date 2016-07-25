@@ -4,11 +4,16 @@
   </button>
   <a routerLink="" class="white no-underline">{{title}}</a>
   <div flex-item></div>
-  <a href="mailto:disneynuttt@gmail.com" md-icon-button class="btn btn-lg">
-    <md-icon>email</md-icon>
-  </a>
-  <a href="" md-icon-button class="btn btn-lg">
-    <md-icon>print</md-icon>
-  </a>
+
+  <md-menu-bar id="user-menu" role="menubar" class="_md _md-keyboard-mode md-default-theme" *ngIf="(af.auth|async)">
+    <md-menu md-position-mode="left bottom" class="md-menu ng-scope _md">
+      <button class="user-button md-button ng-scope md-ink-ripple md-default-theme" type="button" ng-transclude=""
+              ng-click="$mdOpenMenu()" aria-label="User settings" translate=""
+              translate-attr-aria-label="TOOLBAR.USER_SETTINGS" aria-haspopup="true" aria-expanded="false"
+              aria-owns="menu_container_9" (click)="logout()">
+          <span class="username hide show-gt-sm" hide="" show-gt-sm="">{{(af.auth|async)? (af.auth|async).auth.email:''}}</span>
+      </button>
+    </md-menu>
+  </md-menu-bar>
 
 </md-toolbar>

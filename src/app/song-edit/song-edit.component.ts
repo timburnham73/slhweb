@@ -18,23 +18,47 @@ import {MdToolbar} from '@angular2-material/toolbar';
 
 export class SongEditComponent implements OnInit {
   private sub: any;
-  private items: FirebaseListObservable<any[]>;
+  private isNew:boolean;
+  private songs: FirebaseListObservable<any[]>;
   public song:any;
+  private uid:string;
   constructor(private route: ActivatedRoute,
               private router: Router,
               private af: AngularFire) {
-
+    this.af.auth.subscribe(response => {
+      this.uid = response.uid;
+    });
   }
 
   ngOnInit() {
+    this.isNew = false;
+      this.song = {
+          name: '',
+          'key':'',
+          'length':''
+      };
+    this.songs = this.af.database.list('/songs');
     this.sub = this.route.params.subscribe(params => {
       let id:string = params['songid'];
-      let object= this.af.database.object('/songs/' + id);
-      object.subscribe(x => {
-        this.song = x;
-      });
+      this.song = this.af.database.object('/songs/' + id);
+      this.isNew = id === 'new'? true:false;
+
 
     });
   }
+
+  save(name:string, length:string, key:string){
+    if(this.isNew === true){
+      this.songs.push({name:name,length:length,key:key, uid:this.uid});
+    }
+    else
+    {
+      this.song.update({name:name,length:length,key:key});
+    }
+
+    this.router.navigate(['/songs']);
+  }
+
+
 
 }

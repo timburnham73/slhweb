@@ -7,7 +7,9 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 import {MD_LIST_DIRECTIVES} from "@angular2-material/list/list";
 import {MdToolbar} from '@angular2-material/toolbar';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
-
+import { AuthService } from '../account/auth/auth-service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/Rx'
 
 @Component({
   moduleId: module.id,
@@ -19,20 +21,31 @@ import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 })
 export class SongsComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
-  itemsQuery: FirebaseListObservable<any[]>;
-  constructor(af: AngularFire, mdIconRegistry: MdIconRegistry, private router: Router) {
-    this.items = af.database.list('/songs');
+  songs: Observable<any[]>;
+
+
+
+  constructor(public af: AngularFire, mdIconRegistry: MdIconRegistry, private router: Router, auth: AuthService) {
+
+    const path = `/songs`;
+    this.items = af.database.list(path);
+
+    this.songs = af.database.list(path).map( songs => songs.filter(song => song.uid === auth.id));
+
+
 
     mdIconRegistry
       .addSvgIconSetInNamespace('core', 'fonts/core-icon-set.svg')
   }
   onRowClick(song){
-    console.log(song);
     this.router.navigate(['/songedit', song.$key]);
   }
 
   add(newName: string, length: string, key: string) {
     this.items.push({ name: newName, length: length, key: key });
+  }
+  addNew(){
+    this.router.navigate(['/songedit', 'new']);
   }
   update(key: string, name: string) {
     this.items.update(key, { name: name });

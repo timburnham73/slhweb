@@ -4,8 +4,8 @@
       <md-input class="demo-full-width" placeholder="Song name" #songname [value]="(song | async)?.name"></md-input>
       <md-input class="demo-full-width" placeholder="Song length" #songlength [value]="(song | async)?.length"></md-input>
       <md-input class="demo-full-width" placeholder="Song key" #songkey [value]="(song | async)?.key"></md-input>
-      <button md-button class="md-icon-button" type="button" aria-label="Save" (click)="save(songname.value,songlength.value,songkey.value)">
-        <md-icon>save</md-icon>
+      <button class="btn btn-default" aria-label="Left Align" type="button" aria-label="Save" (click)="save(songname.value,songlength.value,songkey.value)">
+        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
       </button>
     </form>
   </md-card-content>

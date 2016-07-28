@@ -21,7 +21,8 @@ module.exports = function(defaults) {
       'angularfire2/**/*.js',
       'firebase/*.js',
       '@angular2-material/**/*',
-      'ng2-material/**/*.*'
+      'ng2-material/**/*.*',
+      'bootstrap/dist/**/*.*'
     ]
   });
 };

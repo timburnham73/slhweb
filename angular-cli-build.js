@@ -22,7 +22,8 @@ module.exports = function(defaults) {
       'firebase/*.js',
       '@angular2-material/**/*',
       'ng2-material/**/*.*',
-      'bootstrap/dist/**/*.*'
+      'bootstrap/dist/**/*.*',
+      'font-awesome/**/*.*'
     ]
   });
 };

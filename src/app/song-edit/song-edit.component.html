@@ -1,13 +1,143 @@
-<md-card>
-  <md-card-content>
-    <form>
-      <md-input class="demo-full-width" placeholder="Song name" #songname [value]="(song | async)?.name"></md-input>
-      <md-input class="demo-full-width" placeholder="Song length" #songlength [value]="(song | async)?.length"></md-input>
-      <md-input class="demo-full-width" placeholder="Song key" #songkey [value]="(song | async)?.key"></md-input>
-      <button class="btn btn-default" aria-label="Left Align" type="button" aria-label="Save" (click)="save(songname.value,songlength.value,songkey.value)">
-        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
-      </button>
-    </form>
-  </md-card-content>
-</md-card>
+<div id="wrapper">
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav" id="side-menu">
+        <li class="nav-header">
+          <div class="dropdown profile-element">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong
+                              class="font-bold">David Williams</strong>
+                             </span> <span class="text-muted text-xs block">Art Director <b
+                              class="caret"></b></span> </span> </a>
 
+          </div>
+          <div class="logo-element">
+            IN+
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="page-wrapper" class="gray-bg">
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-sm-4">
+        <h2>Song Detail</h2>
+
+      </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="mail-box-header">
+            <div class="pull-right tooltip-demo">
+              <a class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title=""
+                 data-original-title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+              <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title=""
+                 data-original-title="Discard email"><i class="fa fa-times"></i> Discard</a>
+            </div>
+            <h2>
+              Compse mail
+            </h2>
+          </div>
+          <div class="mail-box">
+
+
+            <div class="mail-body">
+
+              <form class="form-horizontal" method="get">
+                <div class="form-group"><label class="col-sm-2 control-label">Song name:</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Song name" #songname [value]="(song | async)?.name? (song | async)?.name:''">
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Song length:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Song length" #songname [value]="(song | async)?.length? (song | async)?.length:''">
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Artist:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Artist" #artist [value]="(song | async)?.artist ? (song | async)?.artist: ''">
+                  </div>
+                </div>
+
+                <div class="form-group"><label class="col-sm-2 control-label">Genre:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Genre" #genre [value]="(song | async)?.genre? (song | async)?.genre : ''">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Notes:</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" id="notes" placeholder="Notes" #notes [value]="(song | async)?.notes? (song | async)?.notes:''">
+
+                    </textarea>
+
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Other:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" placeholder="Other" #other [value]="(song | async)?.other? (song | async)?.other : ''">
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Tempo:</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" placeholder="Tempo" #tempo [value]="(song | async)?.tempo? (song | async)?.tempo : ''">
+                  </div>
+                </div>
+                <div class="form-group"><label class="col-sm-2 control-label">Youtube</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" placeholder="Youtube" #tempo [value]="(song | async)?.tempo? (song | async)?.tempo: ''">
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+
+            <div class="clearfix"></div>
+
+
+          </div>
+
+
+        </div>
+        <div class="col-lg-8">
+          <div class="mail-box-header">
+            <div class="pull-right tooltip-demo">
+              <a class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title=""
+                 data-original-title="Move to draft folder"><i class="fa fa-pencil"></i> Draft</a>
+              <a class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title=""
+                 data-original-title="Discard email"><i class="fa fa-times"></i> Discard</a>
+            </div>
+            <h2>
+              Compse mail
+            </h2>
+          </div>
+          <div class="mail-box">
+
+
+            <div class="mail-body">
+
+              <form class="form-horizontal" method="get">
+                <div class="form-group">
+                  <label for="lyrics">Lyrics:</label>
+                  <textarea class="form-control" rows="5" id="lyrics"></textarea>
+                </div>
+
+              </form>
+
+            </div>
+
+
+            <div class="clearfix"></div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>

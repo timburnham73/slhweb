@@ -23,6 +23,7 @@
 
   <!-- Main Inspinia CSS files -->
   <link href="inspana/css/animate.css" rel="stylesheet">
+  <link href="inspana/css/plugins/iCheck/custom.css" rel="stylesheet">
   <link id="loadBefore" href="inspana/css/style.css" rel="stylesheet">
 
 </head>
@@ -40,7 +41,7 @@
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="inspana/js/jquery-2.1.1.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="inspana/js/plugins/jquery-ui/jquery-ui.js"></script>
 <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -51,11 +52,25 @@
 <!-- SlimScroll -->
 <script src="inspana/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-<!-- Peace JS -->
-<script src="inspana/js/plugins/pace/pace.min.js"></script>
+
 
 <!-- Custom and plugin javascript -->
 <script src="inspana/js/inspinia.js"></script>
+
+<!-- Peace JS -->
+<script src="inspana/js/plugins/pace/pace.min.js"></script>
+<!-- iCheck -->
+<script src="inspana/js/plugins/iCheck/icheck.min.js"></script>
+
+<script>
+  $(document).ready(function(){
+    var checks = $('.i-checks').iCheck({
+      checkboxClass: 'icheckbox_square-green',
+      radioClass: 'iradio_square-green',
+    });
+    console.log($('.i-checks').length);
+  });
+</script>
 
 </body>
 </html>

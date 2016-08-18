@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
@@ -11,6 +11,8 @@ import { AuthService } from '../account/auth/auth-service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx'
 
+declare var jQuery:any;
+
 @Component({
   moduleId: module.id,
   selector: 'app-songs',
@@ -19,7 +21,7 @@ import 'rxjs/Rx'
   directives: [ MD_CARD_DIRECTIVES, MD_BUTTON_DIRECTIVES, MdIcon, MdToolbar, MD_LIST_DIRECTIVES, ROUTER_DIRECTIVES, MD_INPUT_DIRECTIVES],
   providers: [MdIconRegistry]
 })
-export class SongsComponent implements OnInit {
+export class SongsComponent implements OnInit, AfterViewInit {
   items: FirebaseListObservable<any[]>;
   songs: Observable<any[]>;
 
@@ -61,7 +63,14 @@ export class SongsComponent implements OnInit {
     this.items.remove();
   }
 
-  ngOnInit() {
+  ngOnInit(){
+
+  }
+
+  ngAfterViewInit() {
+
   }
 
 }
+
+

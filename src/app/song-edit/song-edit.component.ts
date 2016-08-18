@@ -47,7 +47,16 @@ export class SongEditComponent implements OnInit {
     });
   }
 
-  save(name:string, length:string, key:string){
+  save(name:string,
+       length:string,
+       key:string,
+       tempo:string,
+       artist:string,
+       genre:string,
+       lyrics:string,
+       notes:string,
+       other:string
+  ){
     if(this.isNew === true){
       this.songs.push({name:name,length:length,key:key, uid:this.uid});
     }

@@ -66,7 +66,7 @@
 
                   </td>
                   <td>
-                    {{ song.artist}}
+                    {{ (song.artist | async)?.name}}
                   </td>
                   <td>
                     {{ song.length}}

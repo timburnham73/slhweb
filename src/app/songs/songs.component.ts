@@ -36,7 +36,14 @@ export class SongsComponent implements OnInit, AfterViewInit {
       query:{
         orderByChild: 'name'
       }
-    }).map( songs => songs.filter(song => song.uid === auth.id));
+    })
+      .map((songs) => {
+        return songs.map((song) =>{
+          song.artist = af.database.object(`/artist/${song.artistId}`);
+          console.log(song.artist);
+          return song;
+        })
+    });
 
 
 

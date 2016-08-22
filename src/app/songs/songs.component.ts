@@ -40,7 +40,6 @@ export class SongsComponent implements OnInit, AfterViewInit {
       .map((songs) => {
         return songs.map((song) =>{
           song.artist = af.database.object(`/artist/${song.artistId}`);
-          console.log(song.artist);
           return song;
         })
     });

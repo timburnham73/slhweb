@@ -12,7 +12,12 @@
           <div class="mail-box-header">
             <div class="pull-right tooltip-demo">
               <a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title=""
-                 data-original-title="Save song"><i class="fa fa-save" (click)="save(song.name)"></i> Save</a>
+                 data-original-title="Save song">
+                <i class="fa fa-save"
+                    (click)="save(songname.value,songlength.value,songkey.value,songtempo.value, artist.value, genre.value,lyrics.value,notes.value, other.value)">
+                </i>
+                Save
+              </a>
             </div>
             <h2>
               Song Details
@@ -22,7 +27,6 @@
 
 
             <div class="mail-body">
-
               <form #f="ngForm" class="form-horizontal" method="get">
                 <div class="form-group container-fluid">
                   <div class="row">
@@ -37,12 +41,12 @@
                     </div>
                     <div class="col-sm-4">
 
-                      <md-input class="demo-full-width" placeholder="Length" #songname
+                      <md-input class="demo-full-width" placeholder="Length" #songlength
                                 [value]="(song | async)?.length? (song | async)?.length:''"></md-input>
                     </div>
                     <div class="col-sm-4">
 
-                      <md-input class="demo-full-width" placeholder="Tempo" #songkey [value]="(song | async)?.tempo"></md-input>
+                      <md-input class="demo-full-width" placeholder="Tempo" #songtempo [value]="(song | async)?.tempo"></md-input>
                     </div>
                   </div>
                   <div class="row">

@@ -20,6 +20,7 @@ export class SongEditComponent implements OnInit {
   private sub: any;
   private isNew:boolean;
   private songs: FirebaseListObservable<any[]>;
+  private artists: FirebaseListObservable<any[]>;
   public song:any;
   private uid:string;
   constructor(private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class SongEditComponent implements OnInit {
           'length':''
       };
     this.songs = this.af.database.list('/songs');
+    this.artists = this.af.database.list('/artists');
     this.sub = this.route.params.subscribe(params => {
       let id:string = params['songid'];
       this.song = this.af.database.object('/songs/' + id);
@@ -58,14 +60,52 @@ export class SongEditComponent implements OnInit {
        other:string
   ){
     if(this.isNew === true){
-      this.songs.push({name:name,length:length,key:key, uid:this.uid});
+
+      //this.artists.map( artists => artists.filter(artist => artist.name === artist.name));
+
+      var newItemKey = this.songs.push({name:name,length:length,key:key, tempo:tempo,lyrics:lyrics, uid:this.uid}).key;
+
+
     }
     else
     {
-      this.song.update({name:name,length:length,key:key});
+      this.getOrCreateArtist(artist).then(
+        function(result){
+          var artistKey;
+          if(result){
+            artistKey = result['$key'];
+          }
+          else{
+            artistKey = this.artists.push({name:artist}).key;
+          }
+
+          this.song.update({name:name,length:length,key:key, tempo:tempo, lyrics:lyrics, artistId:artistKey});
+        }
+      );
+
     }
 
     this.router.navigate(['/songs']);
+  }
+
+  getOrCreateArtist(name: string){
+    return new Promise((resolve, reject) => {
+
+    this.af.database.list('/artists', {
+      query: {
+        orderByChild: 'name',
+        equalTo: name
+      }
+    }).subscribe(response => {
+      if(response.length === 0) {
+        resolve(null);
+
+      } else {
+        resolve(response[0]);
+      }
+    });
+
+    });
   }
 
 

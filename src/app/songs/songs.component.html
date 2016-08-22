@@ -29,7 +29,7 @@
                 <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
                 <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
                 <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
-                <strong class="pull-right">Found 61 songs.</strong>
+                <strong class="pull-right">Found {{(songs | async)?.length}} songs</strong>
               </div>
 
 

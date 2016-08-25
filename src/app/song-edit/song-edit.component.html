@@ -11,10 +11,10 @@
         <div class="col-lg-12">
           <div class="mail-box-header">
             <div class="pull-right tooltip-demo">
-              <a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title=""
+              <a class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="" href="#"
+                 (click)="save(songname.value,songlength.value,songkey.value,songtempo.value, artist.value, genre.value,lyrics.value,notes.value, other.value)"
                  data-original-title="Save song">
-                <i class="fa fa-save"
-                    (click)="save(songname.value,songlength.value,songkey.value,songtempo.value, artist.value, genre.value,lyrics.value,notes.value, other.value)">
+                <i class="fa fa-save">
                 </i>
                 Save
               </a>

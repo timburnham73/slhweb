@@ -1,0 +1,92 @@
+
+<div id="page-wrapper" class="gray-bg">
+  <div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox">
+          <div class="ibox-title">
+            <h5>Song list</h5>
+            <div class="ibox-tools">
+              <a href="" class="btn btn-primary btn-xs" (click)="addNew()">Add new setlist</a>
+            </div>
+          </div>
+          <div class="ibox-content">
+
+            <div class="m-b-lg">
+
+              <div class="input-group">
+                <input type="text" placeholder="Search by song name..." class=" form-control">
+                <span class="input-group-btn">
+                                        <button type="button" class="btn btn-white"> Search</button>
+                                    </span>
+              </div>
+              <div class="m-t-md">
+
+                <div >
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-comments"></i> </button>
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-list"></i> </button>
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
+                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
+                  <strong class="pull-right">Found {{(songs | async)?.length}} songs</strong>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
+
+            <div class="table-responsive">
+              <table class="table table-hover issue-tracker">
+                <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th>Name</th>
+                  <th>Artist</th>
+                  <th>Length</th>
+                  <th>Key</th>
+                  <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let song of songs | async">
+                  <td>
+                    <input type="checkbox"  checked class="i-checks" name="input[]">
+                  </td>
+                  <td>
+                    <span class="label label-primary">Added</span>
+                  </td>
+                  <td class="issue-info" (click)="onRowClick(song)">
+
+                    {{ song.name}}
+
+                  </td>
+                  <td>
+                    {{ (song.artist | async)?.name}}
+                  </td>
+                  <td>
+                    {{ song.length}}
+                  </td>
+                  <td>
+                    {{ song.key}}
+                  </td>
+                  <td class="text-right">
+                    <button class="btn btn-white btn-xs" (click)="onRowClick(song)"> Edit</button>
+                    <button class="btn btn-white btn-xs" (click)="deleteItem(song.$key)"> Delete</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

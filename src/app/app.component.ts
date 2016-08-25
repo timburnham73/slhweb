@@ -4,6 +4,7 @@ import {MD_LIST_DIRECTIVES} from '@angular2-material/list';
 import {MD_SIDENAV_DIRECTIVES} from '@angular2-material/sidenav';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {TitleBarComponent} from './title-bar/title-bar.component';
+
 @Component({
   moduleId: module.id,
   selector: 'app-root',

@@ -9,7 +9,8 @@ import {MdToolbar} from '@angular2-material/toolbar';
 import {ROUTER_DIRECTIVES, Router} from '@angular/router';
 import { AuthService } from '../account/auth/auth-service';
 import {Observable} from 'rxjs/Observable';
-import 'rxjs/Rx'
+import {Subject} from 'rxjs/Subject';
+import {FirebaseRef} from 'angularfire2';
 
 declare var jQuery:any;
 
@@ -28,7 +29,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
 
 
   constructor(public af: AngularFire, mdIconRegistry: MdIconRegistry, private router: Router, auth: AuthService) {
-
+    const subject = new Subject();
     const path = `/songs`;
     this.items = af.database.list(path);
 
@@ -38,7 +39,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
       }
     })
       .map((songs) => {
-        return songs.map((song) =>{
+        return songs.filter(song => song.uid === auth.id).map((song) =>{
           song.artist = af.database.object(`/artist/${song.artistId}`);
           return song;
         })

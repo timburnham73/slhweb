@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {ROUTER_DIRECTIVES, Router, ActivatedRoute} from '@angular/router';
-import {FirebaseListObservable, AngularFire} from "angularfire2/angularfire2";
+import {FirebaseListObservable, AngularFire, FirebaseAuth, FirebaseAuthState, FirebaseRef, AuthProviders} from "angularfire2/angularfire2";
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon/icon';
 import {MdToolbar} from '@angular2-material/toolbar';
+import {Subject} from "rxjs/Subject";
 
 @Component({
   moduleId: module.id,
@@ -22,6 +23,8 @@ export class SongEditComponent implements OnInit {
   private songs: FirebaseListObservable<any[]>;
   private artists: FirebaseListObservable<any[]>;
   public song:any;
+  private artistNameSubject : Subject<any>;
+
   private uid:string;
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -69,6 +72,7 @@ export class SongEditComponent implements OnInit {
     }
     else
     {
+
       this.getOrCreateArtist(artist).then(
         function(result){
           var artistKey;
@@ -76,7 +80,7 @@ export class SongEditComponent implements OnInit {
             artistKey = result['$key'];
           }
           else{
-            artistKey = this.artists.push({name:artist}).key;
+            artistKey = this.artists.set({name:artist}).key;
           }
 
           this.song.update({name:name,length:length,key:key, tempo:tempo, lyrics:lyrics, artistId:artistKey});
@@ -89,12 +93,15 @@ export class SongEditComponent implements OnInit {
   }
 
   getOrCreateArtist(name: string){
+
+    this.artistNameSubject = new Subject();
+    this.artistNameSubject.next(name);
     return new Promise((resolve, reject) => {
 
     this.af.database.list('/artists', {
       query: {
         orderByChild: 'name',
-        equalTo: name
+        equalTo: this.artistNameSubject
       }
     }).subscribe(response => {
       if(response.length === 0) {

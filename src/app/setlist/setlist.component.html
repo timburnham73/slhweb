@@ -29,7 +29,7 @@
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-cogs"></i> </button>
-                  <strong class="pull-right">Found {{(songs | async)?.length}} songs</strong>
+                  <strong class="pull-right">Found {{(setlists | async)?.length}} songs</strong>
                 </div>
 
 
@@ -53,26 +53,26 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let song of songs | async">
+                <tr *ngFor="let setlist of setlists | async">
                   <td>
                     <input type="checkbox"  checked class="i-checks" name="input[]">
                   </td>
                   <td>
                     <span class="label label-primary">Added</span>
                   </td>
-                  <td class="issue-info" (click)="onRowClick(song)">
+                  <td class="issue-info" (click)="onRowClick(setlist)">
 
-                    {{ song.name}}
+                    {{ setlist.name}}
 
                   </td>
                   <td>
-                    {{ (song.artist | async)?.name}}
+                    {{ setlist.name}}
                   </td>
                   <td>
-                    {{ song.length}}
+                    {{ setlist.date}}
                   </td>
                   <td>
-                    {{ song.key}}
+                    {{ setlist.uid}}
                   </td>
                   <td class="text-right">
                     <button class="btn btn-white btn-xs" (click)="onRowClick(song)"> Edit</button>

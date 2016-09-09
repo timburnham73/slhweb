@@ -34,8 +34,14 @@ export class SetlistSongsComponent implements OnInit {
           var songCounter = 0;
           setlist.songItems = [];
           for(var key in setlist.songs) {
-            var songId = setlist.songs[key].songId;
-            setlist.songItems.push(this.af.database.object(`/songs/${songId}`)) ;
+            var song = setlist.songs[key];
+            var songId = song.songId;
+            setlist.songItems.push(
+              {
+                displaySequenceNumber: song.displaySequenceNumber,
+                sequenceNumber: song.sequenceNumber,
+                songDetails: this.af.database.object(`/songs/${songId}`)
+              }) ;
             songCounter++;
           }
           setlist.setlistSongsLength = songCounter;

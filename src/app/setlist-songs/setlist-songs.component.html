@@ -44,7 +44,7 @@
                 <thead>
                 <tr>
                   <th></th>
-                  <th></th>
+                  <th>#</th>
                   <th>Name</th>
                   <th>Artist</th>
                   <th>Length</th>
@@ -58,21 +58,21 @@
                     <input type="checkbox"  checked class="i-checks" name="input[]">
                   </td>
                   <td>
-                    <span class="label label-primary">Added</span>
+                    {{song.displaySequenceNumber}}
                   </td>
                   <td class="issue-info" (click)="onRowClick(song)">
 
-                    {{ (song | async)?.name}}
+                    {{ (song.songDetails | async)?.name}}
 
                   </td>
                   <td>
-                    {{ song.key}}
+                    {{ (song.songDetails | async)?.artist}}
                   </td>
                   <td>
-                    {{ song.name}}
+                    {{ (song.songDetails | async)?.length}}
                   </td>
                   <td>
-                    {{ song.uid}}
+                    {{ (song.songDetails | async)?.key}}
                   </td>
                   <td class="text-right">
                     <button class="btn btn-white btn-xs" (click)="onRowClick(song)"> Edit</button>

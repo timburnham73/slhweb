@@ -10,7 +10,7 @@ export const AppRoutes = [
   { path: 'login', component: LoginComponent },
   { path: 'songs', component: SongsComponent, canActivate: [AuthGuard] },
   { path: 'setlists', component: SetlistComponent, canActivate: [AuthGuard] },
-  { path: 'setlist/:setlistid', component: SetlistSongsComponent, canActivate: [AuthGuard] },
+  { path: 'setlists/setlist/:setlistid', component: SetlistSongsComponent, canActivate: [AuthGuard] },
   { path: 'songedit/:songid', component: SongEditComponent, canActivate: [AuthGuard]}
 ];
 

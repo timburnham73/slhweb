@@ -39,7 +39,7 @@ export class SetlistComponent implements OnInit {
   }
 
   onRowClick(setlist){
-    this.router.navigate(['/setlist', setlist.$key]);
+    this.router.navigate(['/setlists/setlist', setlist.$key]);
   }
 
 }

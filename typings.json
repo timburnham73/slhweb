@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "es6-promise": "registry:npm/es6-promise#3.0.0+20160211003958",
-    "firebase": "registry:npm/firebase#3.0.5+20160705215914"
+    "firebase": "registry:npm/firebase#3.0.5+20160705215914",
+    "lodash": "registry:npm/lodash#4.0.0+20160723033700"
   },
   "globalDependencies": {
     "firebase3": "file:node_modules/angularfire2/firebase3.d.ts",

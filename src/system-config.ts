@@ -94,7 +94,8 @@ System.config({
     'firebase': 'vendor/firebase/firebase.js',
     'angularfire2': 'vendor/angularfire2',
     '@angular2-material': 'vendor/@angular2-material',
-    'ng2-material': 'vendor/ng2-material'
+    'ng2-material': 'vendor/ng2-material',
+    'lodash': 'vendor/lodash/lodash.js'
   },
   packages: cliSystemConfigPackages
 });

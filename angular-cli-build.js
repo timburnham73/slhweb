@@ -23,7 +23,8 @@ module.exports = function(defaults) {
       '@angular2-material/**/*',
       'ng2-material/**/*.*',
       'bootstrap/dist/**/*.*',
-      'font-awesome/**/*.*'
+      'font-awesome/**/*.*',
+      'lodash/**/*.*'
     ]
   });
 };

@@ -29,7 +29,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
 
 
   constructor(public af: AngularFire, mdIconRegistry: MdIconRegistry, private router: Router, auth: AuthService) {
-    const subject = new Subject();
+
     const path = `/songs`;
     this.items = af.database.list(path);
 

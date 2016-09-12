@@ -12,8 +12,10 @@ declare var _:any;
   styleUrls: ['setlist-songs.component.css']
 })
 export class SetlistSongsComponent implements OnInit {
+  showSongs: Boolean;
   items: FirebaseListObservable<any[]>;
   setlist: Observable<any[]>;
+  songs: Observable<any[]>;
   private uid:string;
 
   private sub: any;
@@ -29,7 +31,7 @@ export class SetlistSongsComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(_.chunk(['a', 'b', 'c', 'd'], 2));
+    this.showSongs = false;
 
     this.sub = this.route.params.subscribe(params => {
       let id:string = params['setlistid'];
@@ -53,6 +55,21 @@ export class SetlistSongsComponent implements OnInit {
           return setlist;
       });
     });
+
+
+    //Get the list of songs
+    const path = `/songs`;
+    this.songs = this.af.database.list(path,{
+      query:{
+        orderByChild: 'name'
+      }
+    })
+      .map((songs) => {
+        return songs.filter(song => song.uid === this.auth.id).map((song) =>{
+          song.artist = this.af.database.object(`/artist/${song.artistId}`);
+          return song;
+        })
+      });
   }
 
 }

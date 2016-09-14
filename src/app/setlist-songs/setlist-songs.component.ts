@@ -61,40 +61,47 @@ export class SetlistSongsComponent implements OnInit {
       });
     });
 
+    //Get the setlist songs then filter the song by them.
+    this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
+      .subscribe(songs => {
+        var songIds = [];
+        for(var key in songs) {
+          songIds.push(songs[key].songId);
+        }
 
-    //Get the list of songs
-    const path = `/songs`;
-    this.songs = this.af.database.list(path,{
-      query:{
-        orderByChild: 'name'
-      }
-    })
-      .map((songs) => {
-        return songs.filter(song => song.uid === this.auth.id).map((song) =>{
-          song.artist = this.af.database.object(`/artist/${song.artistId}`);
-          return song;
-        })
+        this.songs = this.af.database.list(`/songs`,{
+            query:{
+              orderByChild: 'name'
+            }
+          })
+          .map((songs) => {
+            return songs.filter(song => song.uid === this.auth.id && !_.includes(songIds, song.$key)).map((song) =>{
+              song.artist = this.af.database.object(`/artist/${song.artistId}`);
+              return song;
+            })
+          });
       });
   }
 
   addSongToSetlist(song) {
 
-    /*this.af.database.list('/setlists/' + this.setlistId + '/songs')
-      .map((songs) => {
-        var song = songs[songs.length-1];
-        console.log(song);
-      });*/
+    this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
+      .subscribe(songs => {
+        var sequenceNumber = 0;
+        for(var key in songs) {
+          if(songs[key].sequenceNumber > sequenceNumber){
+            sequenceNumber = songs[key].sequenceNumber;
+          }
+        }
+        this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).push({
+          displaySequenceNumber: sequenceNumber,
+          sequenceNumber: sequenceNumber,
+          songId: song.$key
+        });
 
-    const path = `/songs`;
+      });
 
-    var queryObservable = this.af.database.list(path,{
-      query:{
-        orderByChild: 'name'
-      }
-    });
-    queryObservable.subscribe(queriedItems => {
-      console.log(queriedItems);
-    });
+
   }
 
   reorderSetlistSongs(){

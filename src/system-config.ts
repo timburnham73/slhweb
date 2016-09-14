@@ -75,7 +75,15 @@ const cliSystemConfigPackages: any = {
   },
   'ng2-material': {//this needs to be nested in packages
     defaultExtension: 'js'
-  }
+  },
+  'ng2-dragula': {
+    main: 'ng2-dragula.js',
+    defaultExtension: 'js'
+  },
+  'Dragula': {
+  main: 'dragula.min.js',
+    defaultExtension: 'js'
+}
 
 };
 barrels.forEach((barrelName: string) => {
@@ -95,7 +103,9 @@ System.config({
     'angularfire2': 'vendor/angularfire2',
     '@angular2-material': 'vendor/@angular2-material',
     'ng2-material': 'vendor/ng2-material',
-    'lodash': 'vendor/lodash/lodash.js'
+    'lodash': 'vendor/lodash/lodash.js',
+    'dragula': 'vendor/dragula/dist/dragula.min.js',
+    'ng2-dragula/ng2-dragula': 'vendor/ng2-dragula/ng2-dragula.js'
   },
   packages: cliSystemConfigPackages
 });

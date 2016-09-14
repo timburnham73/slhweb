@@ -24,7 +24,9 @@ module.exports = function(defaults) {
       'ng2-material/**/*.*',
       'bootstrap/dist/**/*.*',
       'font-awesome/**/*.*',
-      'lodash/**/*.*'
+      'lodash/**/*.*',
+      'dragula/**/*.*',
+      'ng2-dragula/**/*.*'
     ]
   });
 };

@@ -20,6 +20,9 @@
                     <button type="button" class="btn btn-white"> Search</button>
                 </span>
               </div>
+              <div>
+                <button class="btn btn-primary btn-xs pull-right" (click)="addSongsToSetlist(songs)">Add new setlist</button>
+              </div>
 
             </div>
 
@@ -27,18 +30,16 @@
               <table class="table table-hover issue-tracker">
                 <thead>
                 <tr>
-                  <th></th>
                   <th>Name</th>
                   <th>Artist</th>
                   <th>Length</th>
                   <th>Key</th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let song of songs | async">
-                  <td>
-                    <input type="checkbox"  checked class="i-checks" name="input[]">
-                  </td>
+                <tr *ngFor="let song of songs | async" >
+
                   <td class="issue-info" (click)="onRowClick(song)">
                     {{ song.name}}
                   </td>
@@ -50,6 +51,9 @@
                   </td>
                   <td>
                     {{ song.key}}
+                  </td>
+                  <td>
+                    <input type="checkbox" (click)="addSongToSetlist(song)" class="i-checks" name="input[]">
                   </td>
                 </tr>
                 </tbody>
@@ -81,7 +85,7 @@
 
                 <div >
                   <button type="button" (click)="showSongs=true" class="btn btn-sm btn-white"> <i class="fa fa-plus"></i> </button>
-                  <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
+                  <button type="button" (click)="addSongsToSetlist()" class="btn btn-sm btn-white"> <i class="fa fa-user"></i> </button>
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-list"></i> </button>
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-pencil"></i> </button>
                   <button type="button" class="btn btn-sm btn-white"> <i class="fa fa-print"></i> </button>
@@ -100,7 +104,6 @@
               <table class="table table-hover issue-tracker">
                 <thead>
                 <tr>
-                  <th></th>
                   <th>#</th>
                   <th>Name</th>
                   <th>Artist</th>
@@ -111,9 +114,6 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let song of (setlist | async)?.songItems">
-                  <td>
-                    <input type="checkbox"  checked class="i-checks" name="input[]">
-                  </td>
                   <td>
                     {{song.displaySequenceNumber}}
                   </td>
@@ -132,8 +132,13 @@
                     {{ (song.songDetails | async)?.key}}
                   </td>
                   <td class="text-right">
-                    <button class="btn btn-white btn-xs" (click)="onRowClick(song)"> Edit</button>
-                    <button class="btn btn-white btn-xs" (click)="deleteItem(song.$key)"> Delete</button>
+                    <button class="btn btn-white btn-xs" (click)="onRowClick(song)">
+                      <span class="fa fa-pencil"></span>
+                    </button>
+                    <button class="btn btn-white btn-xs" (click)="deleteItem(song.$key)">
+                      <span class="fa fa-trash">
+                      </span>
+                    </button>
                   </td>
                 </tr>
                 </tbody>

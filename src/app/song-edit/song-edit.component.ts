@@ -83,6 +83,15 @@ export class SongEditComponent implements OnInit {
             artistKey = this.artists.set({name:artist}).key;
           }
 
+          /*const user = this.af.database.object(`users/${login}`);
+          user.subscribe(data => {
+            if(data.$value !== null) {
+              console.log('User does not exist');
+            } else {
+              console.log('User does exist');
+            }
+          });*/
+
           this.song.update({name:name,length:length,key:key, tempo:tempo, lyrics:lyrics, artistId:artistKey});
         }
       );

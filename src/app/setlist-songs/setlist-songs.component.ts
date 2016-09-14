@@ -65,8 +65,10 @@ export class SetlistSongsComponent implements OnInit {
     this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
       .subscribe(songs => {
         var songIds = [];
-        for(var key in songs) {
-          songIds.push(songs[key].songId);
+        if(songs.$value) {
+          for (var key in songs) {
+            songIds.push(songs[key].songId);
+          }
         }
 
         this.songs = this.af.database.list(`/songs`,{
@@ -84,22 +86,23 @@ export class SetlistSongsComponent implements OnInit {
   }
 
   addSongToSetlist(song) {
-
+    var sequenceNumber = 0;
     this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
       .subscribe(songs => {
-        var sequenceNumber = 0;
-        for(var key in songs) {
-          if(songs[key].sequenceNumber > sequenceNumber){
-            sequenceNumber = songs[key].sequenceNumber;
+        if(songs.$value) {
+          for (var key in songs) {
+            if (songs[key].sequenceNumber > sequenceNumber) {
+              sequenceNumber = songs[key].sequenceNumber;
+            }
           }
         }
-        this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).push({
-          displaySequenceNumber: sequenceNumber,
-          sequenceNumber: sequenceNumber,
-          songId: song.$key
-        });
-
       });
+
+    this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).push({
+      displaySequenceNumber: sequenceNumber,
+      sequenceNumber: sequenceNumber,
+      songId: song.$key
+    });
 
 
   }

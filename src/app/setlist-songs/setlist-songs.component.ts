@@ -19,6 +19,7 @@ export class SetlistSongsComponent implements OnInit {
   items: FirebaseListObservable<any[]>;
   setlist: Observable<any[]>;
   songs: Observable<any[]>;
+  songIds: Array<any>;
   setlistId: string;
   private uid:string;
 
@@ -49,6 +50,7 @@ export class SetlistSongsComponent implements OnInit {
             var songId = song.songId;
             setlist.songItems.push(
               {
+                $key:key,
                 displaySequenceNumber: song.displaySequenceNumber,
                 sequenceNumber: song.sequenceNumber,
                 songDetails: this.af.database.object(`/songs/${songId}`)
@@ -61,50 +63,64 @@ export class SetlistSongsComponent implements OnInit {
       });
     });
 
+    this.refreshSongs();
+  }
+
+  refreshSongs(){
     //Get the setlist songs then filter the song by them.
     this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
       .subscribe(songs => {
-        var songIds = [];
-        if(songs.$value) {
+        this.songIds = [];
+        var songsExist = !(songs.hasOwnProperty('$value') && !songs['$value']);
+        if(songsExist) {
           for (var key in songs) {
-            songIds.push(songs[key].songId);
+            this.songIds.push(songs[key].songId);
           }
         }
-
-        this.songs = this.af.database.list(`/songs`,{
-            query:{
-              orderByChild: 'name'
-            }
-          })
-          .map((songs) => {
-            return songs.filter(song => song.uid === this.auth.id && !_.includes(songIds, song.$key)).map((song) =>{
-              song.artist = this.af.database.object(`/artist/${song.artistId}`);
-              return song;
-            })
-          });
       });
+
+    this.songs = this.af.database.list(`/songs`,{
+      query:{
+        orderByChild: 'name'
+      }
+    })
+      .map((songs) => {
+        return songs.filter(song => song.uid === this.auth.id && !_.includes(this.songIds, song.$key))
+          .map((song) =>{
+          song.artist = this.af.database.object(`/artist/${song.artistId}`);
+          return song;
+        })
+      });
+
+
   }
 
   addSongToSetlist(song) {
-    var sequenceNumber = 0;
-    this.af.database.object(`/setlists/` + this.setlistId + `/songs` )
-      .subscribe(songs => {
-        if(songs.$value) {
+    var sequenceNumber = 1;
+
+    var subsciption = this.af.database.object(`/setlists/` + this.setlistId + `/songs` ).subscribe(songs => {
+        if(songs.hasOwnProperty('$value') && !songs['$value']) {
+          sequenceNumber = 1;
+        }
+        else{
           for (var key in songs) {
-            if (songs[key].sequenceNumber > sequenceNumber) {
-              sequenceNumber = songs[key].sequenceNumber;
+            if (songs[key].sequenceNumber >= sequenceNumber) {
+              sequenceNumber = songs[key].sequenceNumber+1;
             }
           }
         }
       });
+    subsciption.unsubscribe();
 
-    this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).push({
-      displaySequenceNumber: sequenceNumber,
-      sequenceNumber: sequenceNumber,
-      songId: song.$key
+    this.af.database
+      .list(`/setlists/` + this.setlistId + `/songs` )
+      .push({
+        displaySequenceNumber: sequenceNumber,
+        sequenceNumber: sequenceNumber,
+        songId: song.$key
     });
 
-
+    this.refreshSongs();
   }
 
   reorderSetlistSongs(){
@@ -162,8 +178,13 @@ export class SetlistSongsComponent implements OnInit {
             });
       }
     }
+  }
 
+  removeSong(setlistSong){
+    this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).remove(setlistSong.$key);
+    //reorder the songs.
 
+    this.refreshSongs();
   }
 
 }

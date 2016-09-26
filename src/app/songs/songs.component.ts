@@ -51,7 +51,7 @@ export class SongsComponent implements OnInit, AfterViewInit {
       .addSvgIconSetInNamespace('core', 'fonts/core-icon-set.svg')
   }
   onRowClick(song){
-    this.router.navigate(['/songedit', song.$key]);
+    this.router.navigate(['/lyrics', song.$key]);
   }
 
   add(newName: string, length: string, key: string) {

@@ -24,6 +24,7 @@ export class SetlistSongsComponent implements OnInit {
   private uid:string;
 
   private sub: any;
+  private songToSearchFor;
 
   constructor(private route: ActivatedRoute, public af: AngularFire, private auth: AuthService) {
     this.af = af;
@@ -35,7 +36,7 @@ export class SetlistSongsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.songToSearchFor = '';
     this.showSongs = false;
 
     this.sub = this.route.params.subscribe(params => {
@@ -85,7 +86,8 @@ export class SetlistSongsComponent implements OnInit {
       }
     })
       .map((songs) => {
-        return songs.filter(song => song.uid === this.auth.id && !_.includes(this.songIds, song.$key))
+        return songs.filter(song => song.uid === this.auth.id && !_.includes(this.songIds, song.$key)
+                                                              && song.name.toLowerCase().indexOf(this.songToSearchFor) !== -1)
           .map((song) =>{
           song.artist = this.af.database.object(`/artist/${song.artistId}`);
           return song;
@@ -119,20 +121,11 @@ export class SetlistSongsComponent implements OnInit {
         sequenceNumber: sequenceNumber,
         songId: song.$key
     });
-
+    this.reorderSetlistSongs();
     this.refreshSongs();
   }
 
   reorderSetlistSongs(){
-
-    /*this.af.database
-      .list('/setlists/' + this.setlistId + '/songs')
-      .push(
-        {
-          displaySequenceNumber: 3,
-          sequenceNumber: 3,
-          songId: '-KMWylCNF5cfMi2Kpimw'
-        });*/
 
     var songs = this.af.database.object('/setlists/' + this.setlistId + '/songs', { preserveSnapshot: true });
     var setlistSongs = [];
@@ -154,36 +147,30 @@ export class SetlistSongsComponent implements OnInit {
     });
 
     subscription.unsubscribe();
-
+    var sequenceNumber = 1;
     var setlistSongsLength = setlistSongs.length;
     for(var i = 0; i < setlistSongsLength;i++){
+      this.af.database
+        .object('/setlists/' + this.setlistId + '/songs/' + setlistSongs[i].key)
+        .update(
+          {
+            displaySequenceNumber: sequenceNumber,
+            sequenceNumber: sequenceNumber
+          });
+      sequenceNumber++;
 
-      if(setlistSongs[i].sequenceNumber === 1) {
-        this.af.database
-          .object('/setlists/' + this.setlistId + '/songs/' + setlistSongs[i].key)
-          .update(
-            {
-              displaySequenceNumber: 3,
-              sequenceNumber: 3
-            });
-      }
-
-      if(setlistSongs[i].sequenceNumber === 3) {
-        this.af.database
-          .object('/setlists/' + this.setlistId + '/songs/' + setlistSongs[i].key)
-          .update(
-            {
-              displaySequenceNumber: 1,
-              sequenceNumber: 1
-            });
-      }
     }
   }
 
   removeSong(setlistSong){
     this.af.database.list(`/setlists/` + this.setlistId + `/songs` ).remove(setlistSong.$key);
     //reorder the songs.
+    this.reorderSetlistSongs();
+    this.refreshSongs();
+  }
 
+  searchForSong(songToSearchFor){
+    this.songToSearchFor = songToSearchFor;
     this.refreshSongs();
   }
 

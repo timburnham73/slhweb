@@ -61,6 +61,7 @@ const barrels: string[] = [
   'app/song-edit',
   'app/setlist',
   'app/setlist-songs',
+  'app/song-lyric',
   /** @cli-barrel */
 ];
 

@@ -15,9 +15,9 @@
             <div class="m-b-lg">
 
               <div class="input-group">
-                <input type="text" placeholder="Search by song name..." class=" form-control">
+                <input type="text" placeholder="Search by song name..."  #songForSearch class=" form-control">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-white"> Search</button>
+                    <button type="button" class="btn btn-white" (click)="searchForSong(songForSearch.value)"> Search</button>
                 </span>
               </div>
 
